@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import User from "./models/user.js";
+import userRouter from "./Routes/user.js";
 
 
 dotenv.config();
@@ -15,21 +16,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("common"));
 app.use(cors())
 
-mongoose.set("strictQuery", false);
-mongoose.connect(MONGO_URL, async () => {
-   console.log("mongodb connnected")
-   try {
-      const user1 = await new User({ name: "wesley", email: "wesley@wei.ca", password: 123456 })
-      user1.save((err, user) => {
-         if (err) return console.error(err);
-         console.log(`${user} saved to User collection`)
-      })
-   } catch (err) {
-      console.error(err)
-   }
+app.use("/user", userRouter)
+
+mongoose.set("strictQuery", false)
+mongoose.connect(MONGO_URL, {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+}).then(() => {
+   console.log("mongodb connected")
+}).catch((err) => console.error(err))
+
+
+app.listen(PORT, () => {
+   console.log(`server is listening to port ${PORT}`)
 })
-   .then(() => {
-      app.listen(PORT, () => {
-         console.log(`server is listening to port ${PORT}`)
-      })
-   })
