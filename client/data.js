@@ -1,10 +1,15 @@
-const search = document.getElementsByClassName("search-button")[0];
-const woInput = document.getElementsByName("crexwono")[0];
-woInput.textContent = "E15506"
-search.addEventListener("click", async () => {
-    $(document).ready(function () {
-        console.log("clicked")
-        const result = document.getElementsByClassName("search-results")[0];
-        console.log("🚀 ~ file: data.js:5 ~ window.addEventListener ~ result", result)
-    })
+// import axios from "axios";
+
+// const url = "http://rexinc.net:8080/find_orders.php?crexwono=e15506"
+// axios.get(url).then(res=> {
+//     console.log(res)
+// }).catch(err=> {
+//     console.error(err)
+// })
+
+
+const form = $('form')[0]
+form.submit(function(e){
+    e.preventdefault();
+    console.log("clicked")
 })
