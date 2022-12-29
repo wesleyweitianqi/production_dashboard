@@ -1,3 +1,0 @@
-[submodule "server/server/selenium"]
-	path = server/server/selenium
-	url = git@github.com:wesleyweitianqi/production_dashboard.git
