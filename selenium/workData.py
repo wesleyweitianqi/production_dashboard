@@ -69,6 +69,6 @@ json_object = json.dumps(WO_data)
 with open("../woList.json", "w") as wo_file:
   wo_file.write(json_object)
 print(WO_data)
-# sys.stdout.flush()
+sys.stdout.flush()
 
 

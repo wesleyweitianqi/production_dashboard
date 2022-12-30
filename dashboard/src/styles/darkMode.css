@@ -18,6 +18,7 @@
 
 #darkMode.clicked {
   filter: none !important;
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: black;
+
 }

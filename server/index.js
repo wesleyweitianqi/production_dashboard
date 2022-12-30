@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import userRouter from "./Routes/user.js";
 import dataRouter from "./Routes/data.js";
 import WorkOrder from "./models/workOrder.js";
+import workData from "../woList.json" assert {type: "json"};
 
 
 dotenv.config();
@@ -25,32 +26,33 @@ mongoose.set("strictQuery", false)
 mongoose.connect(MONGO_URL, {
    useNewUrlParser: true,
    useUnifiedTopology: true,
-}).then(() => {
+}).then( () => {
    // populate work order data into mongo db
-   // try {
-   //       data.map(async (item) => {
-   //         const query = await WorkOrder.findOne({"wo#":item.wo})
-   //         console.log("🚀 ~ file: woData.js:25 ~ workOrderList.map ~ query", query)
+   try {
+
+         workData.map(async (item) => {
+           const query = await WorkOrder.findOne({"wo":item.wo})
+           console.log("🚀 ~ file: woData.js:25 ~ workOrderList.map ~ query", query)
            
-   //         if (!query){
-   //           const list1 =await new WorkOrder({
-   //             "wo#": item.wo,
-   //             "catalog#":item.catalogNum,
-   //             "PO#":item.po,
-   //             "description": item.description,
-   //             "customer":item.customer,
-   //             "ps":item.packingslip,
-   //             "qty":item.qty,
-   //             "orderDate":item.order_date,
-   //             "requiredDate":item.require_date,
-   //             "shippingStatus":item.shipping_date
-   //           })
-   //           list1.save()
-   //         }
-   //       })
-   //    } catch(err) {
-   //    console.error(err)
-   // }
+           if (!query){
+             const list1 =await new WorkOrder({
+               "wo": item.wo,
+               "catalog":item.catalogNum,
+               "PO":item.po,
+               "description": item.description,
+               "customer":item.customer,
+               "ps":item.packingslip,
+               "qty":item.qty,
+               "orderDate":item.order_date,
+               "requiredDate":item.require_date,
+               "shippingStatus":item.shipping_date
+             })
+             list1.save()
+           }
+         })
+      } catch(err) {
+      console.error(err)
+   }
    console.log("mongodb connected")
 }).catch((err) => console.error(err))
 

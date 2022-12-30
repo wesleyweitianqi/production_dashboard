@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 
 const workOrderSchema = new mongoose.Schema(
   {
-    "wo#": {
+    "wo": {
       type: String,
       required: true,
       min:6,
     },
-    "catalog#": {
+    "catalog": {
       type: String,
       required:true,
     },
-    "PO#": {
+    "PO": {
       type:String,
       required:true,
     },
