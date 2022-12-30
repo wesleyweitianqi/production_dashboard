@@ -1,4 +1,5 @@
 import React from 'react'
+import DarkMode from './DarkMode'
 
 function Nav() {
   return (
@@ -26,6 +27,7 @@ function Nav() {
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
+      <DarkMode />
   </div>
       </nav>
     </>
