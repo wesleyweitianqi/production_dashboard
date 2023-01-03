@@ -6,9 +6,9 @@ const WorkList = () => {
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    axios.get("http://localhost:3000/data").then((res) => {
+    axios.get("http://localhost:5000/data").then((res) => {
       setData(res.data);
-    });
+    }).catch(err=> console.log(err))
   }, [data]);
 
   const production = (e)=> {
@@ -17,7 +17,9 @@ const WorkList = () => {
     for(let i in data) {
       if (data[i].wo === selectWO) {
         data[i].isProducing = true
-        
+        axios.post("http://localhost:5000/data/post", data[i]).then(res => {
+          console.log(res.data)
+        })
       }
     }
   }
