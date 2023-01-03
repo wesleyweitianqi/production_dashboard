@@ -9,7 +9,8 @@
     "qty": "1",
     "order_date": "Nov 21 2022",
     "require_date": "Dec 21 2022",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   },
   {
     "catalogNum": "N4PL4G05",
@@ -21,7 +22,8 @@
     "qty": "3",
     "order_date": "Dec 2 2022",
     "require_date": "Jan 9 2023",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   },
   {
     "catalogNum": "1C34421G08",
@@ -33,7 +35,8 @@
     "qty": "1",
     "order_date": "Oct 18 2022",
     "require_date": "Jan 18 2023",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   },
   {
     "catalogNum": "1B11196G02",
@@ -45,7 +48,8 @@
     "qty": "10",
     "order_date": "Nov 18 2022",
     "require_date": "Jan 30 2023",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   },
   {
     "catalogNum": "ENCLOSURE",
@@ -57,7 +61,8 @@
     "qty": "1",
     "order_date": "Dec 12 2022",
     "require_date": "Jan 30 2023",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   },
   {
     "catalogNum": "CE16195G02",
@@ -69,6 +74,7 @@
     "qty": "1",
     "order_date": "Dec 16 2022",
     "require_date": "Apr 10 2023",
-    "shipping_date": false
+    "isProducing": false,
+    "shipping_state": false
   }
 ]

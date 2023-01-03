@@ -1,18 +1,32 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
 const WorkList = () => {
-  const [data, setData] =useState([])
-  useEffect(()=> {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
     axios.get("http://localhost:3000/data").then((res) => {
       setData(res.data);
     });
-  }, [data])
-   const dataEle = data.map((item) => {
+  }, [data]);
+
+  const production = (e)=> {
+    const woEle = e.target.parentNode;
+    const selectWO = woEle.closest('div.card').getAttribute("id")
+    for(let i in data) {
+      if (data[i].wo === selectWO) {
+        data[i].isProducing = true
+        
+      }
+    }
+  }
+
+  const dataEle = Array.isArray(data) && data.map((item,index) => {
     return (
       <div
-      key={item.wo}
+        id={item.wo}
+        key={index}
         className="card border-primary mb-3"
         style={{ maxWidth: "18rem", margin: "1rem auto" }}
       >
@@ -20,6 +34,24 @@ const WorkList = () => {
         <div className="card-body text-primary">
           <h5 className="card-title">{item.catalog}</h5>
           <p className="card-text">{item.description}</p>
+          <p className="card-text">
+            Require_date: {item.requiredDate.substr(0, 10)}
+          </p>
+          <div>
+
+          {item.isProducing ? (
+            <button type="button" className="btn btn-outline-primary btn-md">
+              In Production
+            </button>
+          ) : (
+            <button type="button" onClick={(e)=>production(e)} className="btn btn-outline-secondary btn-md">
+              Start Production
+            </button>
+          )}
+          <button type="button" className="btn btn-outline-success btn-md">
+              Finish
+            </button>
+          </div>
         </div>
       </div>
     );

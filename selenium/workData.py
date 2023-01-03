@@ -55,7 +55,8 @@ for i in woList:
     "qty":list[19],
     "order_date":list[27],
     "require_date":list[43],
-    "shipping_date":False,
+    "isProducing":False,
+    "shipping_state":False,
     }
     WO_data.append(WOinfo)
     driver.find_element("name", "crexwono").clear()

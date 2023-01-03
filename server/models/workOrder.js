@@ -42,6 +42,10 @@ const workOrderSchema = new mongoose.Schema(
     "shippingStatus": {
       type:Boolean,
       required:true,
+    },
+    "isProducing": {
+      type: Boolean,
+      required:true,
     }
   }, 
   {timestamps: true}
