@@ -9,8 +9,15 @@ Router.get("/", async (req, res) => {
 });
 
 Router.post("/post", async(req, res) => {
-  const data = req.body
-  console.log("🚀 ~ file: data.js:13 ~ Router.post ~ data", data)
+  const data = req.body;
+  const ordernumber =data.wo
+  
+  await WorkOrder.updateOne({"wo":ordernumber}, {
+    $set: { "isProducing":data.isProducing  },
+    $currentDate: { lastModified: true }
+  })
+  const newworkOrder = await WorkOrder.find({"wo": ordernumber})
+  res.json(newworkOrder)
 })
 export default Router;
 

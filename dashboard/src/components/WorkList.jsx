@@ -9,16 +9,19 @@ const WorkList = () => {
     axios.get("http://localhost:5000/data").then((res) => {
       setData(res.data);
     }).catch(err=> console.log(err))
-  }, [data]);
+  }, []);
 
   const production = (e)=> {
     const woEle = e.target.parentNode;
     const selectWO = woEle.closest('div.card').getAttribute("id")
     for(let i in data) {
       if (data[i].wo === selectWO) {
-        data[i].isProducing = true
+        data[i].isProducing = !(data[i].isProducing);
+        console.log(data[i].isProducing)
         axios.post("http://localhost:5000/data/post", data[i]).then(res => {
-          console.log(res.data)
+          const newData = res.data;
+          console.log("🚀 ~ file: WorkList.jsx:22 ~ axios.post ~ newData", newData)
+          setData([...data, newData])
         })
       }
     }
@@ -37,12 +40,12 @@ const WorkList = () => {
           <h5 className="card-title">{item.catalog}</h5>
           <p className="card-text">{item.description}</p>
           <p className="card-text">
-            Require_date: {item.requiredDate.substr(0, 10)}
+            {/* Require_date: {item.requiredDate !==null && item.requiredDate.substr(0, 10)} */}
           </p>
           <div>
 
           {item.isProducing ? (
-            <button type="button" className="btn btn-outline-primary btn-md">
+            <button type="button" onClick={(e)=>production(e)} className="btn btn-outline-primary btn-md">
               In Production
             </button>
           ) : (
