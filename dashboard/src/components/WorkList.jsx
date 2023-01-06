@@ -6,7 +6,7 @@ const WorkList = () => {
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    axios.get("http://localhost:5000/data").then((res) => {
+    axios.get("http://localhost:3000/data").then((res) => {
       setData(res.data);
     }).catch(err=> console.log(err))
   }, []);
@@ -18,7 +18,7 @@ const WorkList = () => {
       if (data[i].wo === selectWO) {
         data[i].isProducing = !(data[i].isProducing);
         console.log(data[i].isProducing)
-        axios.post("http://localhost:5000/data/post", data[i]).then(res => {
+        axios.post("http://localhost:3000/data/post", data[i]).then(res => {
           const newData = res.data;
           console.log("🚀 ~ file: WorkList.jsx:22 ~ axios.post ~ newData", newData)
           setData([...data, newData])
@@ -42,14 +42,14 @@ const WorkList = () => {
           <p className="card-text">
             {/* Require_date: {item.requiredDate !==null && item.requiredDate.substr(0, 10)} */}
           </p>
-          <div>
+          <div className="row">
 
           {item.isProducing ? (
-            <button type="button" onClick={(e)=>production(e)} className="btn btn-outline-primary btn-md">
+            <button className="col-md-6" type="button" onClick={(e)=>production(e)} className="btn btn-outline-primary btn-md">
               In Production
             </button>
           ) : (
-            <button type="button" onClick={(e)=>production(e)} className="btn btn-outline-secondary btn-md">
+            <button className="col-md-6" type="button" onClick={(e)=>production(e)} className="btn btn-outline-secondary btn-md">
               Start Production
             </button>
           )}

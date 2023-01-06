@@ -18,7 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("common"));
 app.use(cors())
-
+// app.use((req, res, next) => {
+//    res.header('Access-Control-Allow-Origin', '*');
+//    next();
+//  });
 app.use("/user", userRouter)
 app.use("/data", dataRouter)
 
@@ -28,34 +31,31 @@ mongoose.connect(MONGO_URL, {
    useUnifiedTopology: true,
 }).then( () => {
    // populate work order data into mongo db
-  //  try {
-
-  //        workData.map(async (item) => {
-  //          const query = await WorkOrder.findOne({"wo":item.wo})
-  //        //   console.log("🚀 ~ file: woData.js:25 ~ workOrderList.map ~ query", query)
+   // try {
+   //       workData.map(async (item) => {
+   //         const query = await WorkOrder.findOne({"wo":item.wo})
+   //       //   console.log("🚀 ~ file: woData.js:25 ~ workOrderList.map ~ query", query)
            
-  //          if (!query){
-  //            const list1 =await new WorkOrder({
-  //              "wo": item.wo,
-  //              "catalog":item.catalogNum,
-  //              "PO":item.po,
-  //              "description": item.description,
-  //              "customer":item.customer,
-  //              "ps":item.packingslip,
-  //              "qty":item.qty,
-  //              "orderDate":item.order_date,
-  //              "requiredDate":item.require_date,
-  //              "isProducing":item.isProducing,
-  //              "shippingStatus":item.shipping_state
-  //            })
-  //            list1.save()
-  //          }
-  //        })
-  //     } catch(err) {
-  //     console.error(err)
-  //  }
+   //         if (!query){
+   //           const list1 =await new WorkOrder({
+   //             "wo": item.wo,
+   //             "catalog":item.catalogNum,
+   //             "PO":item.po,
+   //             "description": item.description,
+   //             "customer":item.customer,
+   //             "ps":item.packingslip,
+   //             "qty":item.qty,
+   //             "orderDate":item.order_date,
+   //             "requiredDate":item.require_date,
+   //             "isProducing":item.isProducing,
+   //             "shippingStatus":item.shipping_state
+   //           })
+   //           list1.save()
+   //         }
+   //       })
+   //    } catch(err) {console.error(err)}
    console.log("mongodb connected")
-}).catch((err) => console.error(err))
+})
 
 app.listen(PORT, () => {
    console.log(`server is listening to port ${PORT}`)
