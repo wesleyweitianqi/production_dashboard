@@ -1,9 +1,10 @@
 import React from 'react'
+import CompleteTable from './CompleteTable.jsx'
 
 const Finished = () => {
   return (
     <div>
-      Finished List
+      <CompleteTable />
     </div>
   )
 }

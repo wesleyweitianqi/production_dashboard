@@ -19,6 +19,13 @@ Router.post("/post", async(req, res) => {
   const newworkOrder = await WorkOrder.find({"wo": ordernumber})
   res.json(newworkOrder)
 })
+
+Router.get('/find', async (req, res)=> {
+  const { data } = req. query;
+  
+})
+
+
 export default Router;
 
 

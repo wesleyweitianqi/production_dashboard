@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { io } from "socket.io-client";
 
 const WorkList = () => {
   const [data, setData] = useState([]);
-  
   useEffect(() => {
     axios.get("http://localhost:3000/data").then((res) => {
       setData(res.data);
-    }).catch(err=> console.log(err))
+    }).catch(err => console.log(err))
   }, []);
+  const sendMessage = () => {
+    const socket = io("http://localhost:3000",  { transports: ['websocket', 'polling', 'flashsocket'] });
+    socket.on("message", msg => console.log(msg))
+    socket.emit('message', "hello , I am from client")
+  }
 
-  const production = (e)=> {
+  const production = (e) => {
     const woEle = e.target.parentNode;
     const selectWO = woEle.closest('div.card').getAttribute("id")
-    for(let i in data) {
+    for (let i in data) {
       if (data[i].wo === selectWO) {
         data[i].isProducing = !(data[i].isProducing);
-        console.log(data[i].isProducing)
+        sendMessage()
         axios.post("http://localhost:3000/data/post", data[i]).then(res => {
-          const newData = res.data;
-          console.log("🚀 ~ file: WorkList.jsx:22 ~ axios.post ~ newData", newData)
-          setData([...data, newData])
+          const newData = res.data[0];
+          return;
         })
       }
     }
   }
 
-  const dataEle = Array.isArray(data) && data.map((item,index) => {
+  const dataEle = Array.isArray(data) && data.map((item, index) => {
     return (
       <div
         id={item.wo}
@@ -44,16 +47,16 @@ const WorkList = () => {
           </p>
           <div className="row">
 
-          {item.isProducing ? (
-            <button className="col-md-6" type="button" onClick={(e)=>production(e)} className="btn btn-outline-primary btn-md">
-              In Production
-            </button>
-          ) : (
-            <button className="col-md-6" type="button" onClick={(e)=>production(e)} className="btn btn-outline-secondary btn-md">
-              Start Production
-            </button>
-          )}
-          <button type="button" className="btn btn-outline-success btn-md">
+            {item.isProducing ? (
+              <button  type="button" onClick={(e) => production(e)} className="btn btn-outline-primary btn-md">
+                In Production
+              </button>
+            ) : (
+              <button type="button" onClick={(e) => production(e)} className="btn btn-outline-secondary btn-md">
+                Start Production
+              </button>
+            )}
+            <button type="button" className="btn btn-outline-success btn-md">
               Finish
             </button>
           </div>
